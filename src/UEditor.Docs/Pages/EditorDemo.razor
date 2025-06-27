@@ -1,0 +1,14 @@
+@page "/editor-demo"
+
+<h3>Rich Text Editor Demo</h3>
+
+<RichTextEditor.RichTextEditor @ref="editor" @bind-Value="value" @bind-Html="html" Height="300px" Width="600px" Placeholder="Type here..." />
+
+<p>Text: @value</p>
+<p>@((MarkupString)html)</p>
+
+@code {
+    private string value = string.Empty;
+    private string html = string.Empty;
+    private RichTextEditor.RichTextEditor editor;
+}
