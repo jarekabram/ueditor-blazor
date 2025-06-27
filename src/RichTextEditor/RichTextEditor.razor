@@ -1,11 +1,32 @@
-<div class="rte-toolbar">
-    <button type="button" @onclick='() => ExecCommand("bold")'><b>B</b></button>
-    <button type="button" @onclick='() => ExecCommand("italic")'><i>I</i></button>
-    <button type="button" @onclick='() => ExecCommand("insertOrderedList")'>OL</button>
-    <button type="button" @onclick='() => ExecCommand("insertUnorderedList")'>UL</button>
-    <button type="button" @onclick="CreateLink">Link</button>
-    <button type="button" @onclick="TriggerImageUpload">Img</button>
-    <button type="button" @onclick="TriggerFileUpload">File</button>
+<div class="rte-toolbar @ToolbarClass" style="@ToolbarStyle">
+    @if (_toolbarButtons.Contains("bold"))
+    {
+        <button type="button" @onclick='() => ExecCommand("bold")'><b>B</b></button>
+    }
+    @if (_toolbarButtons.Contains("italic"))
+    {
+        <button type="button" @onclick='() => ExecCommand("italic")'><i>I</i></button>
+    }
+    @if (_toolbarButtons.Contains("orderedList"))
+    {
+        <button type="button" @onclick='() => ExecCommand("insertOrderedList")'>OL</button>
+    }
+    @if (_toolbarButtons.Contains("unorderedList"))
+    {
+        <button type="button" @onclick='() => ExecCommand("insertUnorderedList")'>UL</button>
+    }
+    @if (_toolbarButtons.Contains("link"))
+    {
+        <button type="button" @onclick="CreateLink">Link</button>
+    }
+    @if (_toolbarButtons.Contains("image"))
+    {
+        <button type="button" @onclick="TriggerImageUpload">Img</button>
+    }
+    @if (_toolbarButtons.Contains("file"))
+    {
+        <button type="button" @onclick="TriggerFileUpload">File</button>
+    }
     <InputFile @ref="_imageInput" style="display:none" OnChange="UploadImage" />
     <InputFile @ref="_fileInput" style="display:none" OnChange="UploadFile" />
 </div>

@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text.Json;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace RichTextEditor
@@ -25,6 +26,9 @@ namespace RichTextEditor
         [Parameter] public string Class { get; set; }
         [Parameter] public string Style { get; set; }
         [Parameter] public string UploadUrl { get; set; }
+        [Parameter] public string ToolbarClass { get; set; }
+        [Parameter] public string ToolbarStyle { get; set; }
+        [Parameter] public Dictionary<string, object> Options { get; set; } = new();
         [Parameter] public EventCallback<string> OnFocus { get; set; }
         [Parameter] public EventCallback<string> OnBlur { get; set; }
         [Parameter] public EventCallback<string> OnEscPress { get; set; }
@@ -34,6 +38,7 @@ namespace RichTextEditor
         protected ElementReference _ref;
         private InputFile _imageInput;
         private InputFile _fileInput;
+        private List<string> _toolbarButtons = new() { "bold", "italic", "orderedList", "unorderedList", "link", "image", "file" };
         protected readonly string _id = Guid.NewGuid().ToString();
 
         protected override void OnInitialized()
@@ -44,6 +49,12 @@ namespace RichTextEditor
             Height ??= "200px";
             Placeholder ??= string.Empty;
             UploadUrl ??= "/api/upload";
+            Options ??= new Dictionary<string, object>();
+
+            if (Options.TryGetValue("ToolbarButtons", out var tb) && tb is IEnumerable<string> buttons)
+            {
+                _toolbarButtons = new List<string>(buttons);
+            }
         }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
