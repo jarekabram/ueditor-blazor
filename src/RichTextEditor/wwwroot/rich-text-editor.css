@@ -1,0 +1,12 @@
+[data-placeholder]:empty:before {
+    content: attr(data-placeholder);
+    color: #aaa;
+}
+
+.rte-toolbar {
+    margin-bottom: 4px;
+}
+
+.rte-toolbar button {
+    margin-right: 2px;
+}

@@ -1,0 +1,37 @@
+<div class="rte-toolbar @ToolbarClass" style="@ToolbarStyle">
+    @if (_toolbarButtons.Contains("bold"))
+    {
+        <button type="button" @onclick='() => ExecCommand("bold")'><b>B</b></button>
+    }
+    @if (_toolbarButtons.Contains("italic"))
+    {
+        <button type="button" @onclick='() => ExecCommand("italic")'><i>I</i></button>
+    }
+    @if (_toolbarButtons.Contains("orderedList"))
+    {
+        <button type="button" @onclick='() => ExecCommand("insertOrderedList")'>OL</button>
+    }
+    @if (_toolbarButtons.Contains("unorderedList"))
+    {
+        <button type="button" @onclick='() => ExecCommand("insertUnorderedList")'>UL</button>
+    }
+    @if (_toolbarButtons.Contains("link"))
+    {
+        <button type="button" @onclick="CreateLink">Link</button>
+    }
+    @if (_toolbarButtons.Contains("image"))
+    {
+        <button type="button" @onclick="TriggerImageUpload">Img</button>
+    }
+    @if (_toolbarButtons.Contains("file"))
+    {
+        <button type="button" @onclick="TriggerFileUpload">File</button>
+    }
+    <InputFile @ref="_imageInput" style="display:none" OnChange="UploadImage" />
+    <InputFile @ref="_fileInput" style="display:none" OnChange="UploadFile" />
+</div>
+<div @ref="_ref" contenteditable="true"
+     @oninput="HandleInput" @onblur="HandleBlur" @onfocus="HandleFocus"
+     @onkeydown="HandleKeyDown" @onmouseup="HandleSelection" @onkeyup="HandleSelection"
+     style="width:@Width; height:@Height; @Style" class="@Class" id="@_id"
+     data-placeholder="@Placeholder">@((MarkupString)Html)</div>

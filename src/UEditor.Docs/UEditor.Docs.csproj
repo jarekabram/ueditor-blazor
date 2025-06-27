@@ -7,5 +7,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\UEditor\UEditor.csproj" />
+    <ProjectReference Include="..\RichTextEditor\RichTextEditor.csproj" />
   </ItemGroup>
 </Project>
