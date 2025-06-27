@@ -1,0 +1,16 @@
+<div class="rte-toolbar">
+    <button type="button" @onclick='() => ExecCommand("bold")'><b>B</b></button>
+    <button type="button" @onclick='() => ExecCommand("italic")'><i>I</i></button>
+    <button type="button" @onclick='() => ExecCommand("insertOrderedList")'>OL</button>
+    <button type="button" @onclick='() => ExecCommand("insertUnorderedList")'>UL</button>
+    <button type="button" @onclick="CreateLink">Link</button>
+    <button type="button" @onclick="TriggerImageUpload">Img</button>
+    <button type="button" @onclick="TriggerFileUpload">File</button>
+    <InputFile @ref="_imageInput" style="display:none" OnChange="UploadImage" />
+    <InputFile @ref="_fileInput" style="display:none" OnChange="UploadFile" />
+</div>
+<div @ref="_ref" contenteditable="true"
+     @oninput="HandleInput" @onblur="HandleBlur" @onfocus="HandleFocus"
+     @onkeydown="HandleKeyDown" @onmouseup="HandleSelection" @onkeyup="HandleSelection"
+     style="width:@Width; height:@Height; @Style" class="@Class" id="@_id"
+     data-placeholder="@Placeholder">@((MarkupString)Html)</div>
